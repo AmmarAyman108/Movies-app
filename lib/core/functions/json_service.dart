@@ -1,11 +1,11 @@
-import 'package:movies_pp/core/api_methods/api_methods.dart';
-import 'package:movies_pp/core/constants.dart';
+import 'package:movies_pp/core/api/api_consumer.dart';
+import 'package:movies_pp/core/api/endpoint.dart';
 import 'package:movies_pp/core/entities/movie_entity.dart';
 import 'package:movies_pp/core/models/movies_model.dart';
 
 convertJsonToModel(Map<String, dynamic> jsonData) {
   List<MovieEntity> movies = [];
-  for (var element in jsonData['results']) {
+  for (var element in jsonData[ApiKeywords.results]) {
     movies.add(MovieModel.fromJson(element));
   }
   return movies;
@@ -13,17 +13,16 @@ convertJsonToModel(Map<String, dynamic> jsonData) {
 
 Future<Map<String, dynamic>> fetchJsonData(
     {required String endPoint,
-    required ApiService apiService,
+    required ApiConsumer apiConsumer,
     Map<String, dynamic>? queryParameter}) async {
   Map<String, dynamic>? queryParameters = {
-    "api_key": Settings.apiKey,
-    "page": 1
+    ApiKeywords.apiKey: Endpoints.apiKey,
+    ApiKeywords.page: 1
   };
   if (queryParameter != null) {
     queryParameters.addAll(queryParameter);
   }
-  Map<String, dynamic> jsonData = await apiService.get(
+  Map<String, dynamic> jsonData = await apiConsumer.get(
       endPoint: endPoint, queryParameters: queryParameters);
   return jsonData;
 }
-//

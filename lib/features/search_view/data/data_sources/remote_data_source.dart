@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_pp/core/api_methods/api_methods.dart';
+import 'package:movies_pp/core/api/api_consumer.dart';
 import 'package:movies_pp/core/entities/movie_entity.dart';
 import 'package:movies_pp/core/functions/json_service.dart';
 
@@ -8,13 +8,13 @@ abstract class SearchRemoteDataSource {
 }
 
 class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
-  final ApiService apiService;
+  final ApiConsumer apiConsumer;
 
-  SearchRemoteDataSourceImpl({required this.apiService});
+  SearchRemoteDataSourceImpl({required this.apiConsumer});
   @override
   Future<List<MovieEntity>> fetchSearchedMovies({required String movieName}) async {
     Map<String, dynamic> jsonData = await fetchJsonData(
-      apiService: apiService,
+      apiConsumer: apiConsumer,
       endPoint: "search/movie",
       queryParameter: {"query": movieName},
     );
