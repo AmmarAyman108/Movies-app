@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:movies_pp/core/api/api_consumer.dart';
+import 'package:movies_pp/core/api/endpoint.dart';
 import 'package:movies_pp/core/entities/movie_entity.dart';
 import 'package:movies_pp/core/functions/json_service.dart';
 
@@ -15,11 +15,10 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
   Future<List<MovieEntity>> fetchSearchedMovies({required String movieName}) async {
     Map<String, dynamic> jsonData = await fetchJsonData(
       apiConsumer: apiConsumer,
-      endPoint: "search/movie",
-      queryParameter: {"query": movieName},
+      endPoint:Endpoints.searchMovie ,
+      queryParameter: {ApiKeys.query: movieName},
     );
     List<MovieEntity> movies = convertJsonToModel(jsonData);
-    debugPrint("movies : \n $movies");
     return movies;
   }
 

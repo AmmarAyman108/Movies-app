@@ -13,8 +13,14 @@ class DioConsumer implements ApiConsumer {
         'Authorization': 'Bearer $token',
       };
     }
-    dio.interceptors.add(LogInterceptor(
-        responseBody: true, request: true, error: true, requestBody: true));
+    dio.interceptors.add(
+      LogInterceptor(
+        responseBody: true,
+        request: true,
+        error: true,
+        requestBody: true,
+      ),
+    );
   }
 
   @override

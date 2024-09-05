@@ -16,7 +16,13 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 4),
+    navigateToOnBoardingScreen();
+  }
+
+  Future navigateToOnBoardingScreen() async {
+    await Future.delayed(
+        const Duration(seconds: 4),
+        // ignore: use_build_context_synchronously
         () => Navigator.popAndPushNamed(context, Routes.onboarding));
   }
 

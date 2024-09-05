@@ -5,7 +5,7 @@ import 'package:movies_pp/core/models/movies_model.dart';
 
 convertJsonToModel(Map<String, dynamic> jsonData) {
   List<MovieEntity> movies = [];
-  for (var element in jsonData[ApiKeywords.results]) {
+  for (var element in jsonData[ApiKeys.results]) {
     movies.add(MovieModel.fromJson(element));
   }
   return movies;
@@ -16,8 +16,8 @@ Future<Map<String, dynamic>> fetchJsonData(
     required ApiConsumer apiConsumer,
     Map<String, dynamic>? queryParameter}) async {
   Map<String, dynamic>? queryParameters = {
-    ApiKeywords.apiKey: Endpoints.apiKey,
-    ApiKeywords.page: 1
+    ApiKeys.apiKey: Endpoints.apiKey,
+    ApiKeys.page: 1
   };
   if (queryParameter != null) {
     queryParameters.addAll(queryParameter);

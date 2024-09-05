@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_pp/core/string.dart';
 import 'package:movies_pp/core/widgets/custom_carousel_slider_widget.dart';
 import 'package:movies_pp/core/widgets/custom_error_widget.dart';
-import 'package:movies_pp/core/widgets/custom_loading_indecator_widget.dart';
+import 'package:movies_pp/core/widgets/custom_loading_indicator_widget.dart';
 import 'package:movies_pp/features/movies_view/presentation/cubits/fetch_popular_movies/fetch_popular_movies_cubit.dart';
 
 class TrendingOfWeekMovies extends StatelessWidget {

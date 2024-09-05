@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:movies_pp/core/api/api_consumer.dart';
 import 'package:movies_pp/core/api/endpoint.dart';
+import 'package:movies_pp/core/constant.dart';
 import 'package:movies_pp/core/entities/movie_entity.dart';
 import 'package:movies_pp/core/functions/json_service.dart';
 
@@ -20,11 +21,10 @@ class MoviesRemoteDataSourceImpl extends MoviesRemoteDataSource {
   Future<List<MovieEntity>> fetchPopularMovies() async {
     Map<String, dynamic> jsonData = await fetchJsonData(
       apiConsumer: apiConsumer,
-      endPoint: "movie/popular",
+      endPoint: Endpoints.popularMovie,
     );
     List<MovieEntity> movies = convertJsonToModel(jsonData);
-    debugPrint("movies : \n $movies");
-    await saveDataLocally(movies: movies, boxName: Endpoints.kPopularMoviesBox);
+    await saveDataLocally(movies: movies, boxName: Settings.kPopularMoviesBox);
     return movies;
   }
 
@@ -32,11 +32,10 @@ class MoviesRemoteDataSourceImpl extends MoviesRemoteDataSource {
   Future<List<MovieEntity>> fetchTopRatedMovies() async {
     Map<String, dynamic> jsonData = await fetchJsonData(
       apiConsumer: apiConsumer,
-      endPoint: "movie/top_rated",
+      endPoint: Endpoints.topRatedMovie,
     );
     List<MovieEntity> movies = convertJsonToModel(jsonData);
-    debugPrint("movies : \n $movies");
-    await saveDataLocally(movies: movies, boxName: Endpoints.kTopRatedMoviesBox);
+    await saveDataLocally(movies: movies, boxName: Settings.kTopRatedMoviesBox);
 
     return movies;
   }
@@ -45,12 +44,11 @@ class MoviesRemoteDataSourceImpl extends MoviesRemoteDataSource {
   Future<List<MovieEntity>> fetchTrendingOfWeekMovies() async {
     Map<String, dynamic> jsonData = await fetchJsonData(
       apiConsumer: apiConsumer,
-      endPoint: "trending/all/week",
+      endPoint: Endpoints.trendingAllWeekMovie,
     );
     List<MovieEntity> movies = convertJsonToModel(jsonData);
-    debugPrint("movies : \n $movies");
     await saveDataLocally(
-        movies: movies, boxName: Endpoints.kTrendingOfWeekMoviesBox);
+        movies: movies, boxName: Settings.kTrendingOfWeekMoviesBox);
 
     return movies;
   }
@@ -59,11 +57,11 @@ class MoviesRemoteDataSourceImpl extends MoviesRemoteDataSource {
   Future<List<MovieEntity>> fetchUpcomingMovies() async {
     Map<String, dynamic> jsonData = await fetchJsonData(
       apiConsumer: apiConsumer,
-      endPoint: "movie/upcoming",
+      endPoint: Endpoints.upcomingMovie,
     );
     List<MovieEntity> movies = convertJsonToModel(jsonData);
     debugPrint("movies : \n $movies");
-    await saveDataLocally(movies: movies, boxName: Endpoints.kUpcomingMoviesBox);
+    await saveDataLocally(movies: movies, boxName: Settings.kUpcomingMoviesBox);
 
     return movies;
   }

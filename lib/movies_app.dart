@@ -13,6 +13,7 @@ import 'package:movies_pp/features/movies_view/presentation/cubits/fetch_popular
 import 'package:movies_pp/features/movies_view/presentation/cubits/fetch_top_rated_movies/fetch_top_rated_movies_cubit.dart';
 import 'package:movies_pp/features/movies_view/presentation/cubits/fetch_trending_of_week_movies/fetch_trending_of_week_movies_cubit.dart';
 import 'package:movies_pp/features/movies_view/presentation/cubits/fetch_upcoming_movies/fetch_upcoming_movies_cubit.dart';
+import 'package:movies_pp/features/settings_view/presentation/manager/cubits/theme_cubit/theme_cubit.dart';
 
 class MoviesApp extends StatelessWidget {
   const MoviesApp({super.key});
@@ -49,12 +50,21 @@ class MoviesApp extends StatelessWidget {
             ),
           )..fetchTrendingOfWeekMovies(),
         ),
+        BlocProvider(
+          create: (context) => ThemeCubit()..loadTheme(),
+        ),
       ],
-      child: MaterialApp(
-        theme: AppTheme.get(),
-        debugShowCheckedModeBanner: false,
-        initialRoute: Routes.splash,
-        onGenerateRoute: AppRouter.onGenerateRoute,
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            theme: LightMode.get(),
+            darkTheme:DarkMode.get() ,
+            themeMode:state.themeMode,
+            debugShowCheckedModeBanner: false,
+            initialRoute: Routes.splash,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+          );
+        },
       ),
     );
   }

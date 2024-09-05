@@ -58,7 +58,7 @@ class SearchViewBody extends StatelessWidget {
               height: 14,
             ),
           ),
-          SearchedMovies(),
+          const SearchedMovies(),
           const SliverToBoxAdapter(
             child: SizedBox(
               height: 14,

@@ -12,4 +12,5 @@ class ColorManager {
   static const Color kBottomBarColor = Color(0xFF2F3342);
   static const Color kRedColor = Color.fromARGB(255, 255, 0, 0);
   static const Color kBackgroundColor = Color(0xFF1E1F27);
+  static const Color whiteColor = Color.fromARGB(255, 184, 184, 184);
 }

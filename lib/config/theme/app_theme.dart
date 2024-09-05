@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movies_pp/core/color.dart';
 
-class AppTheme {
+class DarkMode {
   static ThemeData get() {
     return ThemeData.dark().copyWith(
       scaffoldBackgroundColor: ColorManager.kBackgroundColor,
@@ -10,6 +10,20 @@ class AppTheme {
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.kBackgroundColor,
           systemNavigationBarColor: ColorManager.kBackgroundColor,
+        ),
+      ),
+    );
+  }
+}
+
+class LightMode {
+  static ThemeData get() {
+    return ThemeData.light().copyWith(
+      scaffoldBackgroundColor: ColorManager.whiteColor,
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: ColorManager.whiteColor,
+          systemNavigationBarColor: ColorManager.whiteColor,
         ),
       ),
     );

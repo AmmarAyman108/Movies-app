@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:movies_pp/core/api/endpoint.dart';
 import 'package:movies_pp/core/color.dart';
+import 'package:movies_pp/core/constant.dart';
 import 'package:movies_pp/core/entities/movie_entity.dart';
 import 'package:movies_pp/core/locator.dart';
 import 'package:movies_pp/core/observer.dart';
@@ -11,12 +11,16 @@ import 'package:movies_pp/movies_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
   setup();
-  await initializedHive();
+  await initializedHiveRegisterAdapter();
+  await createdHiveBoxes();
   setSystemUIOverlayStyle();
-  Bloc.observer = SimpleObserver();
+  initializedObserver();
   runApp(const MoviesApp());
+}
+
+void initializedObserver() {
+  Bloc.observer = SimpleObserver();
 }
 
 void setSystemUIOverlayStyle() {
@@ -26,11 +30,18 @@ void setSystemUIOverlayStyle() {
   ));
 }
 
-Future<void> initializedHive() async {
-  
+Future<void> initializedHiveRegisterAdapter() async {
+  await Hive.initFlutter();
   Hive.registerAdapter<MovieEntity>(MovieEntityAdapter());
-  await Hive.openBox<MovieEntity>(Endpoints.kPopularMoviesBox);
-  await Hive.openBox<MovieEntity>(Endpoints.kTopRatedMoviesBox);
-  await Hive.openBox<MovieEntity>(Endpoints.kTrendingOfWeekMoviesBox);
-  await Hive.openBox<MovieEntity>(Endpoints.kUpcomingMoviesBox);
+  await createdHiveBoxes();
+}
+
+Future<void> createdHiveBoxes() async {
+  await Future.wait([
+    Hive.openBox<String>(Settings.themeBox),
+    Hive.openBox<MovieEntity>(Settings.kPopularMoviesBox),
+    Hive.openBox<MovieEntity>(Settings.kTopRatedMoviesBox),
+    Hive.openBox<MovieEntity>(Settings.kTrendingOfWeekMoviesBox),
+    Hive.openBox<MovieEntity>(Settings.kUpcomingMoviesBox),
+  ]);
 }
