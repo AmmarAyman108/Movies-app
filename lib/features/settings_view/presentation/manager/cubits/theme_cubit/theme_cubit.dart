@@ -17,8 +17,10 @@ class ThemeCubit extends Cubit<ThemeState> {
         box.get(Settings.themeKey, defaultValue: Settings.systemValue);
     switch (theme) {
       case 'light':
+        isDark = false;
         emit(LightTheme(themeMode: ThemeMode.light));
       case 'dark':
+        isDark = true;
         emit(DarkTheme(themeMode: ThemeMode.dark));
       default:
         emit(SystemTheme(themeMode: ThemeMode.system));

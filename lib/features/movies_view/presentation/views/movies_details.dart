@@ -23,16 +23,19 @@ class MoviesDetails extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: CachedNetworkImage(
-                        imageUrl: movie.imageUrl,
-                        height: 500,
-                        fit: BoxFit.fill,
-                        placeholder: (context, url) =>
-                            const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                    FittedBox(
+                      fit: BoxFit.fill,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: CachedNetworkImage(
+                          imageUrl: movie.imageUrl,
+                          height: 500,
+                          fit: BoxFit.fill,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
                       ),
                     ),
                     const SizedBox(
